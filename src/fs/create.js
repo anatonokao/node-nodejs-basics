@@ -22,8 +22,8 @@ const create = async () => {
     });
 };
 
-await create();
-
 function colorizeText(text, color) {
   return color + text + "\x1b[0m" + "\n";
 }
+
+await create();

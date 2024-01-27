@@ -72,8 +72,8 @@ async function copyFiles() {
   }
 }
 
-await copy();
-
 function colorizeText(text, color) {
   return color + text + "\x1b[0m" + "\n";
 }
+
+await copy();
