@@ -38,7 +38,7 @@ const performCalculations = async () => {
   });
 
   workers.forEach((worker, index) => {
-    worker.postMessage({ n: 10 + index + 1, index });
+    worker.postMessage({ n: 10 + index, index });
   });
 };
 
