@@ -9,28 +9,28 @@ const WORKER_PATH = `${__dirname}/worker.js`;
 const cpuCores = os.cpus().length;
 
 const performCalculations = async () => {
-  const res = [];
-
   const workers = createWorkers(cpuCores, WORKER_PATH);
+
+  const res = Array.from({ length: cpuCores }, () => null);
 
   workers.forEach((worker) => {
     worker.on("message", (data) => {
-      res.splice(data.index, 0, {
+      res[data.index] = {
         status: "resolved",
         data: data.res,
-      });
-      if (res.length === cpuCores) {
+      };
+      if (!res.includes(null)) {
         console.log(res);
         process.exit(0);
       }
     });
 
     worker.on("error", (data) => {
-      res.splice(data.index, 0, {
+      res[data.index] = {
         status: "error",
         data: null,
-      });
-      if (res.length === cpuCores) {
+      };
+      if (!res.includes(null)) {
         console.log(res);
         process.exit(0);
       }
