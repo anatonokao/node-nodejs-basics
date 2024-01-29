@@ -42,8 +42,8 @@ const performCalculations = async () => {
   });
 };
 
-function createWorkers(n, worker) {
-  return Array.from({ length: cpuCores }, () => new Worker(WORKER_PATH));
+function createWorkers(n, workerPath) {
+  return Array.from({ length: n }, () => new Worker(workerPath));
 }
 
 await performCalculations();
